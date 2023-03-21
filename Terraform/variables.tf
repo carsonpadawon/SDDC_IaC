@@ -4,8 +4,8 @@ and the org_id */
 variable "security" {
   type = map(string)
   default = {
-    "api_token" = "_dr8fd1zi4n_m61TYYTthPMakbiSN7qoh7zdW7KEJSsn6aWgmgTSrOXIxZzRVAtR"
-    "org_id"    = "6de32bf8-0d33-4dcf-a160-1a4332c6d3fa"
+    "api_token" = var.r_token
+    "org_id"    = var.org_id
   }
 }
 
