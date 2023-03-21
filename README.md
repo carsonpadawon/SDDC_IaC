@@ -1,2 +1,3 @@
-# SDDC_IaC
-Deploying a VMC on AWS SDDC with Terraform and Python
+# Deploying and Managing your SDDC with IaC
+The scripts in this repo were built for the consumption of anyone interested in building an VMware Cloud on AWS Software Defined DataCenter (SDDC)
+

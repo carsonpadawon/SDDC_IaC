@@ -1,0 +1,98 @@
+[0m[1mdata.vmc_connected_accounts.set_aws_acct: Reading...[0m[0m
+[0m[1mdata.vmc_connected_accounts.set_aws_acct: Read complete after 1s [id=bcf82c07-217c-38f0-9a56-bf846fd0fcaa][0m
+[0m[1mdata.vmc_customer_subnets.segment_172: Reading...[0m[0m
+[0m[1mdata.vmc_customer_subnets.segment_172: Read complete after 1s [id=6de32bf8-0d33-4dcf-a160-1a4332c6d3fa-bcf82c07-217c-38f0-9a56-bf846fd0fcaa][0m
+[0m[1mvmc_sddc.sddc_1: Refreshing state... [id=d2758371-2224-4b18-9432-9ad40e12b16b][0m
+[0m[1mmodule.nsxt.data.nsxt_policy_transport_zone.overlay_tz: Reading...[0m[0m
+[0m[1mmodule.nsxt.data.nsxt_policy_transport_zone.overlay_tz: Read complete after 0s [id=795b7c8c-8f45-4056-9bd7-40d23ab905b8][0m
+[0m[1mvmc_public_ip.public_ip_1: Refreshing state... [id=93fb24a6-8ef2-42dd-897f-61e35a8696bb][0m
+
+Terraform used the selected providers to generate the following execution
+plan. Resource actions are indicated with the following symbols:
+  [32m+[0m create
+  [33m~[0m update in-place
+[0m
+Terraform will perform the following actions:
+
+[1m  # vmc_sddc.sddc_1[0m will be updated in-place[0m[0m
+[0m  [33m~[0m[0m resource "vmc_sddc" "sddc_1" {
+        [1m[0mid[0m[0m                       = "d2758371-2224-4b18-9432-9ad40e12b16b"
+        [90m# (43 unchanged attributes hidden)[0m[0m
+
+      [33m~[0m [0maccount_link_sddc_config {
+          [33m~[0m [0m[1m[0mcustomer_subnet_ids[0m[0m  = [
+              [31m-[0m [0m"subnet-a9bd1ede",
+              [32m+[0m [0m"subnet-0b5c47250dffdcc76",
+            ]
+            [90m# (1 unchanged attribute hidden)[0m[0m
+        }
+
+        [90m# (1 unchanged block hidden)[0m[0m
+    }
+
+[1m  # module.nsxt.nsxt_policy_fixed_segment.rc_network[0m will be created[0m[0m
+[0m  [32m+[0m[0m resource "nsxt_policy_fixed_segment" "rc_network" {
+      [32m+[0m [0m[1m[0mconnectivity_path[0m[0m = "/infra/tier-1s/cgw"
+      [32m+[0m [0m[1m[0mdescription[0m[0m       = "network for VMs"
+      [32m+[0m [0m[1m[0mdisplay_name[0m[0m      = "rc_network"
+      [32m+[0m [0m[1m[0mid[0m[0m                = (known after apply)
+      [32m+[0m [0m[1m[0mnsx_id[0m[0m            = (known after apply)
+      [32m+[0m [0m[1m[0moverlay_id[0m[0m        = (known after apply)
+      [32m+[0m [0m[1m[0mpath[0m[0m              = (known after apply)
+      [32m+[0m [0m[1m[0mrevision[0m[0m          = (known after apply)
+
+      [32m+[0m [0msubnet {
+          [32m+[0m [0m[1m[0mcidr[0m[0m        = "172.40.16.1/24"
+          [32m+[0m [0m[1m[0mdhcp_ranges[0m[0m = [
+              [32m+[0m [0m"172.40.16.25-172.40.16.200",
+            ]
+          [32m+[0m [0m[1m[0mnetwork[0m[0m     = (known after apply)
+        }
+    }
+
+[1m  # module.nsxt.nsxt_policy_fixed_segment.tkg_network[0m will be created[0m[0m
+[0m  [32m+[0m[0m resource "nsxt_policy_fixed_segment" "tkg_network" {
+      [32m+[0m [0m[1m[0mconnectivity_path[0m[0m = "/infra/tier-1s/cgw"
+      [32m+[0m [0m[1m[0mdescription[0m[0m       = "network for tkgm management VMs"
+      [32m+[0m [0m[1m[0mdisplay_name[0m[0m      = "tkg_network"
+      [32m+[0m [0m[1m[0mid[0m[0m                = (known after apply)
+      [32m+[0m [0m[1m[0mnsx_id[0m[0m            = (known after apply)
+      [32m+[0m [0m[1m[0moverlay_id[0m[0m        = (known after apply)
+      [32m+[0m [0m[1m[0mpath[0m[0m              = (known after apply)
+      [32m+[0m [0m[1m[0mrevision[0m[0m          = (known after apply)
+
+      [32m+[0m [0msubnet {
+          [32m+[0m [0m[1m[0mcidr[0m[0m        = "172.20.16.1/24"
+          [32m+[0m [0m[1m[0mdhcp_ranges[0m[0m = [
+              [32m+[0m [0m"172.20.16.25-172.20.16.200",
+            ]
+          [32m+[0m [0m[1m[0mnetwork[0m[0m     = (known after apply)
+        }
+    }
+
+[1m  # module.nsxt.nsxt_policy_fixed_segment.vm_network[0m will be created[0m[0m
+[0m  [32m+[0m[0m resource "nsxt_policy_fixed_segment" "vm_network" {
+      [32m+[0m [0m[1m[0mconnectivity_path[0m[0m = "/infra/tier-1s/cgw"
+      [32m+[0m [0m[1m[0mdescription[0m[0m       = "network for VMs"
+      [32m+[0m [0m[1m[0mdisplay_name[0m[0m      = "vm_network"
+      [32m+[0m [0m[1m[0mid[0m[0m                = (known after apply)
+      [32m+[0m [0m[1m[0mnsx_id[0m[0m            = (known after apply)
+      [32m+[0m [0m[1m[0moverlay_id[0m[0m        = (known after apply)
+      [32m+[0m [0m[1m[0mpath[0m[0m              = (known after apply)
+      [32m+[0m [0m[1m[0mrevision[0m[0m          = (known after apply)
+
+      [32m+[0m [0msubnet {
+          [32m+[0m [0m[1m[0mcidr[0m[0m        = "172.10.16.1/24"
+          [32m+[0m [0m[1m[0mdhcp_ranges[0m[0m = [
+              [32m+[0m [0m"172.10.16.25-172.10.16.200",
+            ]
+          [32m+[0m [0m[1m[0mnetwork[0m[0m     = (known after apply)
+        }
+    }
+
+[0m[1mPlan:[0m 3 to add, 1 to change, 0 to destroy.
+[0m[90m
+─────────────────────────────────────────────────────────────────────────────[0m
+
+Note: You didn't use the -out option to save this plan, so Terraform can't
+guarantee to take exactly these actions if you run "terraform apply" now.
