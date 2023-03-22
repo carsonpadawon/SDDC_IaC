@@ -1,28 +1,6 @@
 # This file is maintained automatically by "terraform init".
 # Manual edits may be lost in future updates.
 
-provider "registry.terraform.io/vmware/nsxt" {
-  version     = "3.2.9"
-  constraints = "3.2.9"
-  hashes = [
-    "h1:xTHmZjEdwd1Ej8Mi5P+bWKf550etRRllLs5iwFBIN0Q=",
-    "zh:063731c2993891037dae2494f010889656c3341809abac6fe1301d018da59a1a",
-    "zh:0b692554424f1e66aac197df5f1366654d9a8b7ccd5815abe34d29a63e30396c",
-    "zh:1dcf9b759df92d41078051bebf6239940982f53764db97e593a47deb362e2244",
-    "zh:2701cc8abc130e28267f9825124a0f67fcb3ad713cde13d41ef05719b33ecdb2",
-    "zh:2a878e926337aaa39d9f7fde3e8d53dd39bbf7c8d942beb91e4b9831b2338a1b",
-    "zh:6a1756363bec3adf6a3e6dcad75589dfc10720ac4c497e3489a70a37693354b5",
-    "zh:6b5790f91dd4d88ca2691677303b8cc25f5f7fcbdc6f0f206cfb4154eef4fe6f",
-    "zh:899892ebcbe1734e54e776215821b74f7bef18d0f97296ef157f71e4b34f6d83",
-    "zh:94e02585210367a1051c99a1bcd08f4b28ca4ac32f200e3bac531b2acc2089cf",
-    "zh:a7a123ea1753270b0ea07ee22bc8577ad6828363253a25144f33c2c2e5cf8ac3",
-    "zh:ac91324bd7f31bf66731396de9c05071e8b5aa257c1ce86001a8ee95687d21fd",
-    "zh:c23a2a6de6c7c4fafc3e43bfb16be05cca32c6f3091a214dea5e16c928e31223",
-    "zh:d6d7591f195a5e6b1a821eba08dac84ff7ddc80a8982ec088c1a7a53ed7a637a",
-    "zh:da10923d031c050db42554d6fc52c88f912766f071452ea62995942a0482b409",
-  ]
-}
-
 provider "registry.terraform.io/vmware/vmc" {
   version     = "1.12.1"
   constraints = "1.12.1"

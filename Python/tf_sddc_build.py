@@ -65,14 +65,13 @@ def generate_token_table():
         table_data.add_row([org_response['org'],org_response['r_token']])
     print(table_data)
 
-parser = argparse.ArgumentParser(description='Create and Update a local API_KEY file to store Org and refresh token.  Run a Terraform script based on the key files')
+parser = argparse.ArgumentParser(description='Create and Update a local API_KEY file to store Org and refresh token.  Create Terraform environment variables for the Refresh Token and API keys')
 parser.add_argument('key_dir',help='Path to the directory of an existing API_KEY file to validate.')
 parser.add_argument('-a','--add',action='store_true',help='Add a Refresh token to existing API_KEY file')
 parser.add_argument('-c','--create',action='store_true',help='Create an API_KEY file to store your refresh tokens')
 parser.add_argument('-d','--delete',action='store_true',help='Delete a Refresh Token')
 parser.add_argument('-l','--list',action='store_true',help='List the Refresh tokens in the current API_KEY file')
-parser.add_argument('-tf','--terraformrun',action='store_true',help='Run a Terraform script for the chosen Organization')
-parser.add_argument('-tc','--terraformchange',action='store_true',help='Run a Terraform script against an SDDC to update it')
+parser.add_argument('-tc','--terraformEnv',action='store_true',help='Create ENV variables for Terraform to use')
 parser.add_argument('-u','--update',action='store_true',help='Update a refresh Token')
 
 args = parser.parse_args()
@@ -103,14 +102,14 @@ elif args.delete:
     read_apikey_file()
     generate_token_table()
     updel_key()
-elif args.terraformrun:
+elif args.terraformEnv:
     working_org = input('Which org would you like to use? ')
     for source_org in response_list:
         s_orgID = str(source_org['org'])
         if working_org == s_orgID:
             print('Creating environment variables from the api_key.txt file.')
-            os.environ['TF_VAR_org_id'] = str(source_org['org'])
-            os.environ['TF_VAR_api_token'] = str(source_org['r_token'])
+            os.environ['TF_VAR_orgid'] = str(source_org['org'])
+            os.environ['TF_VAR_rtoken'] = str(source_org['r_token'])
             os.system('env | grep -i tf')
             os.system('terraform -chdir=/home/rcarson/Projects/vmc-open-source/Terraform plan')
             sys.exit()

@@ -7,15 +7,21 @@ terraform {
   }
 }
 
+variable "rtoken" {
+  type = string
+}
+variable "orgid" {
+  type = string
+}
+
 provider "vmc" {
-  refresh_token = var.security.api_token
-  org_id        = var.security.org_id
+refresh_token = var.rtoken
+org_id        = var.orgid
 }
 
 data "vmc_connected_accounts" "set_aws_acct" {
   account_number = var.aws_acct
 }
-
 data "vmc_customer_subnets" "segment_172" {
   connected_account_id = data.vmc_connected_accounts.set_aws_acct.id
   region               = var.sddc.region
@@ -39,10 +45,12 @@ resource "vmc_sddc" "sddc_1" {
   lifecycle {
     ignore_changes = [edrs_policy_type,enable_edrs]
   }
+  
   account_link_sddc_config {
     customer_subnet_ids  = [data.vmc_customer_subnets.segment_172.ids[0]]
     connected_account_id = data.vmc_connected_accounts.set_aws_acct.id
   }
+  
   timeouts {
     create = "300m"
     update = "300m"
@@ -54,7 +62,6 @@ resource "vmc_sddc" "sddc_1" {
   display_name           = var.sddc.public_ip_name
 }
 output "nsxt_proxy_url" {
-#  value = vmc_public_ip.public_ip_1.nsxt_proxy_url 
   value = trimprefix(vmc_public_ip.public_ip_1.nsxt_reverse_proxy_url, "https://")
 }
 output "vCenter_url" {
@@ -66,6 +73,7 @@ output "cloud_admin_username" {
 output "cloud_admin_password" {
   value = vmc_sddc.sddc_1.cloud_password
 }
+/*
 module "nsxt" {
   source = "./modules/nsxt"
   nsxt_proxy_url = "nsxt_proxy_url"
