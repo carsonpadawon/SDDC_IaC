@@ -2,7 +2,7 @@ terraform {
   required_providers {
     vmc = {
       source  = "vmware/vmc"
-      version = "1.12.1"
+      version = "1.13.0"
     }
   }
 }
@@ -15,8 +15,8 @@ variable "orgid" {
 }
 
 provider "vmc" {
-refresh_token = var.rtoken
-org_id        = var.orgid
+  refresh_token = var.rtoken
+  org_id        = var.orgid
 }
 
 data "vmc_connected_accounts" "set_aws_acct" {

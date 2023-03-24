@@ -3,11 +3,11 @@
 variable "sddc" {
   type = map(string)
   default = {
-    "name"            = "zeroTKGm"
+    "name"            = "IaC Deployment"
     "region"          = "us-west-2"
     "vpc_cidr"        = "10.10.16.0/20"
     "vxlan_subnet"    = "172.30.16.0/24"
-    "public_ip_name"  = "TKGm_public_IP"
+    "public_ip_name"  = "public_VM_IP"
     "number_of_hosts" = "1"
     "instance_type"   = "I3_METAL"
     "sddc_type"       = "1NODE"
@@ -17,5 +17,5 @@ variable "sddc" {
 }
 
 variable "aws_acct" {
-  default = "912805334114"
+  default = "683684961168"
 }
