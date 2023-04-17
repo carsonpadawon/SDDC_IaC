@@ -79,7 +79,7 @@ module "nsxt" {
   nsxt_proxy_url = "nsxt_proxy_url"
   vmc_api_token = var.security.api_token
 }
-/*
+
 module "vsphere" {
   source = "./modules/vsphere"
   vmc_vCenter_url = "vCenter_url"
