@@ -16,5 +16,5 @@ variable "sddc" {
 }
 
 variable "aws_acct" {
-  default = "xxxxxxxxxxxx"
+  default = "683684961168"
 }

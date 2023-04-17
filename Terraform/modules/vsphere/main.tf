@@ -2,52 +2,66 @@ terraform {
   required_providers {
     vsphere = {
         source = "hashicorp/vsphere"
-        version = "2.2.0"
+        version = "2.3.1"
     }
   }
 }
 variable "vmc_vCenter_url" {
-  default = "vcenter.sddc-52-34-52-13.vmwarevmc.com"
+  default = "https://vcenter.sddc-52-89-48-42.vmwarevmc.com/"
 }
 variable "vmc_vCenter_username" {
   default = "cloudadmin@vmc.local"
 }
 variable "vmc_vCenter_password" {
-  default = "W!Sw+Rat16zYCSf"
+  default = "KQ5-8!wTcfrIYaG"
 }
 variable "datacenter" {
   default = "SDDC-Datacenter"
 }
-variable "hosts" {
-  default = [
-    "10.10.18.4"
-  ]
-}
+
 provider "vsphere" {
     user                    = var.vmc_vCenter_username
     password                = var.vmc_vCenter_password
     vsphere_server          = var.vmc_vCenter_url
-    allow_unverified_ssl    = false
+    allow_unverified_ssl    = true
 }
+
 data "vsphere_datacenter" "vmc_datacenter" {
   name = "SDDC-Datacenter"
 }
-data "vsphere_host" "host" {
-  count         = length(var.hosts)
-  name          = var.hosts[count.index]
+
+data "vsphere_resource_pool" "Compute-ResourcePool" {
+  name = "Compute-ResourcePool"
   datacenter_id = data.vsphere_datacenter.vmc_datacenter.id
 }
-resource "vsphere_compute_cluster" "compute_cluster" {
-  name            = "Cluster-1"
-  datacenter_id   = data.vsphere_datacenter.vmc_datacenter.id
-  host_system_ids = [data.vsphere_host.host.*.id]
+
+data "vsphere_datastore" "datastore" {
+  name          = "WorkloadDatastore"
+  datacenter_id = data.vsphere_datacenter.vmc_datacenter.id
 }
-data "vsphere_datastore" "vmc_workload_datastore" {
-    name                    = "WorkloadDatastore"
-    datacenter_id           = data.vsphere_datacenter.vmc_datacenter.name
+
+data "vsphere_compute_cluster" "cluster" {
+  name          = "Cluster-1"
+  datacenter_id = data.vsphere_datacenter.vmc_datacenter.id
 }
-resource "vsphere_content_library" "resource_library" {
-  name                      = "S3 Bucket Resource Library"
-  description               = "S3 Bucket Resource Library"
-  storage_backing           = [data.vsphere_datastore.vmc_workload_datastore]
+
+data "vsphere_network" "network" {
+  name          = "vm_network"
+  datacenter_id = data.vsphere_datacenter.vmc_datacenter.id
+}
+
+resource "vsphere_virtual_machine" "Jumpbox" {
+  name             = "Jumpbox"
+  resource_pool_id = data.vsphere_resource_pool.Compute-ResourcePool.id
+  datastore_id     = data.vsphere_datastore.datastore.id
+  num_cpus         = 2
+  memory           = 2048
+  guest_id         = "other3xLinux64Guest"
+  network_interface {
+    network_id = data.vsphere_network.network.id
+  }
+  disk {
+    label = "disk0"
+    size  = 40
+  }
 }

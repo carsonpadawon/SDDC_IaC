@@ -2,17 +2,17 @@ terraform {
   required_providers {
     nsxt = {
         source = "vmware/nsxt"
-        version = "3.2.9"
+        version = "3.3.0"
     }
   }
 }
 variable "nsxt_proxy_url" {
   type = string 
-  description = "value from main module output"
+  description = "value from main module output set as an environment variable"
 }
 variable "vmc_api_token" {
   type = string
-  description = "value from main module output"
+  description = "value from main module output set as an environment variable"
 }
 
 provider "nsxt" {
