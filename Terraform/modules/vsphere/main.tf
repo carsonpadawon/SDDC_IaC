@@ -7,16 +7,16 @@ terraform {
   }
 }
 variable "vmc_vCenter_url" {
-  default = "https://vcenter.sddc-52-89-48-42.vmwarevmc.com/"
+  type = string 
+  description = "value from main module output."
 }
 variable "vmc_vCenter_username" {
-  default = "cloudadmin@vmc.local"
+  type = string 
+  description = "value from main module output."
 }
 variable "vmc_vCenter_password" {
-  default = "KQ5-8!wTcfrIYaG"
-}
-variable "datacenter" {
-  default = "SDDC-Datacenter"
+  type = string 
+  description = "value from main module output."
 }
 
 provider "vsphere" {

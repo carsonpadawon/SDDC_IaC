@@ -8,11 +8,11 @@ terraform {
 }
 variable "nsxt_proxy_url" {
   type = string 
-  description = "value from main module output set as an environment variable"
+  description = "value from main module output."
 }
 variable "vmc_api_token" {
   type = string
-  description = "value from main module output set as an environment variable"
+  description = "value from main module output."
 }
 
 provider "nsxt" {
