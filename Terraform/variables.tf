@@ -1,4 +1,3 @@
-
 # this section defines the variable for the SDDC creation
 variable "sddc" {
   type = map(string)
@@ -17,5 +16,5 @@ variable "sddc" {
 }
 
 variable "aws_acct" {
-  default = "683684961168"
+  default = "xxxxxxxxxxxx"
 }
