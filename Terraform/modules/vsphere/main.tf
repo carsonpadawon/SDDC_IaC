@@ -50,6 +50,7 @@ data "vsphere_network" "network" {
   datacenter_id = data.vsphere_datacenter.vmc_datacenter.id
 }
 
+# This section creates an empty VM called Jumpbox
 resource "vsphere_virtual_machine" "Jumpbox" {
   name             = "Jumpbox"
   resource_pool_id = data.vsphere_resource_pool.Compute-ResourcePool.id
@@ -63,5 +64,32 @@ resource "vsphere_virtual_machine" "Jumpbox" {
   disk {
     label = "disk0"
     size  = 40
+  }
+}
+
+# This section creates a VM clone from an existing VM template
+data "vsphere_virtual_machine" "template" {
+  name          = "VM_Template_Name"
+  datacenter_id = data.vsphere_datacenter.vmc_datacenter.id 
+}
+
+resource "vsphere_virtual_machine" "Demo" {
+  name             = "Demo"
+  resource_pool_id = data.vsphere_resource_pool.Compute-ResourcePool.id
+  datastore_id     = data.vsphere_datastore.datastore.id
+  num_cpus         = 2
+  memory           = 2048
+  guest_id         = "other3xLinux64Guest"
+  network_interface {
+    network_id     = data.vsphere_network.network.id
+    adapter_type   = data.vsphere_virtual_machine.template.network_interface_types[0]
+  }
+  disk {
+    label            = "disk0"
+    size             = data.vsphere_virtual_machine.template.disks.0.size
+    thin_provisioned = data.vsphere_virtual_machine.template.disks.0.thin_provisioned
+  }
+  clone {
+    template_uuid = data.vsphere_virtual_machine.template.id
   }
 }

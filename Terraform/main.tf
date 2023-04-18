@@ -73,16 +73,19 @@ output "cloud_admin_username" {
 output "cloud_admin_password" {
   value = vmc_sddc.sddc_1.cloud_password
 }
-
+/*  
+# Uncomment this section to run the NSXT module.  Please fill in your site specific information in the NSX module first.
 module "nsxt" {
   source = "./modules/nsxt"
   nsxt_proxy_url = "nsxt_proxy_url"
   vmc_api_token = var.rtoken
 }
 
+# Uncomment this section to run the vSphere module.  Please fill in your site specific information in the vSphere module first.
 module "vsphere" {
   source = "./modules/vsphere"
   vmc_vCenter_url = "vCenter_url"
   vmc_vCenter_username = "cloud_admin_username"
   vmc_vCenter_password = "cloud_admin_password"
 }
+*/
