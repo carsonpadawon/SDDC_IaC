@@ -73,7 +73,7 @@ output "cloud_admin_username" {
 output "cloud_admin_password" {
   value = vmc_sddc.sddc_1.cloud_password
 }
-/*  
+/*
 # Uncomment this section to run the NSXT module.  Please fill in your site specific information in the NSX module first.
 module "nsxt" {
   source = "./modules/nsxt"
