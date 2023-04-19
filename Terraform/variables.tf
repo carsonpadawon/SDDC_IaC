@@ -2,19 +2,19 @@
 variable "sddc" {
   type = map(string)
   default = {
-    "name"            = "IaC Deployment"
-    "region"          = "us-west-2"
-    "vpc_cidr"        = "10.10.16.0/20"
-    "vxlan_subnet"    = "172.30.16.0/24"
-    "public_ip_name"  = "public_VM_IP"
-    "number_of_hosts" = "1"
-    "instance_type"   = "I3_METAL"
-    "sddc_type"       = "1NODE"
-    "deployment_type" = "SingleAZ"
-    "provider"        = "ZEROCLOUD"
+    "name"            = ""  # Example: Test-Dev SDDC
+    "region"          = ""  # Example: us-west-2
+    "vpc_cidr"        = ""  # Example: 10.10.106.0/20
+    "vxlan_subnet"    = ""  # Example: 192.168.1.0/24
+    "public_ip_name"  = ""  # Example: Public_VM_IP  
+    "number_of_hosts" = ""  # Example: 1
+    "instance_type"   = ""  # Example: I4I_Metal
+    "sddc_type"       = ""  # Example: 1NODE
+    "deployment_type" = ""  # Example: SingleAZ
+    "provider"        = ""  # Example: AWS
   }
 }
 
 variable "aws_acct" {
-  default = "683684961168"
+  default = "xxxxxxxxxx"  # Your AWS Account for the attached VPC.  This VPC is customer owned and is used for shared services
 }
