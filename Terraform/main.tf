@@ -6,7 +6,8 @@ terraform {
     }
   }
 }
-
+# These variables will be prompted for when you run PLAN or APPLY.  You can set them as ENV variables by using 
+# export TF_VAR_rtoken='' && export TF_VAR_orgid='' at the CLI.data " "name".
 variable "rtoken" {
   type = string
 }
