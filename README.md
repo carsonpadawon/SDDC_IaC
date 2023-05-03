@@ -15,6 +15,7 @@ flowchart LR
     a[root folder] --> b[modules]
     b[modules] --> c[NSXT]
     b[modules] --> d[vSphere]
+    b[modules] --> e[other modules]
 ```
 
 ## Variable Declaration
@@ -40,6 +41,49 @@ variable "sddc" {
         "instance_type"   = "i4i_metal"
         "sddc_type"       = "1NODE"
         "deployment_type" = "SingleASZ"
-        "provider"        = AWS
+        "provider"        = "AWS"
     }
 }
+variable "aws_acct" {
+    default = "xxxxxxxx"
+}
+```
+
+### Prompt for variables
+In the main.tf or any *"module"*.tf file, you can prompt for the value of a variable by simply declaring it but not assigning a value.
+```
+variable "rtoken" {
+    type = string
+}
+variable "orgid" {
+    type = string
+}
+```
+## main.tf file creation
+In the root of any module folder, starting with the root folder, create a main.tf file.  The provider documentation will provide you with the syntax for creating required sections.  
+
+[VMware VMC provider](https://registry.terraform.io/providers/vmware/vmc/latest/docs)
+
+[VMware NSXT provider](https://registry.terraform.io/providers/vmware/nsxt/latest/docs)
+
+[Hashicorp vSphere provider](https://registry.terraform.io/providers/hashicorp/vsphere/latest/docs) **NOTE:** This provider is maintained by VMware.
+
+![vmc provider info](Images/VMC%20Provider%20info.png)
+
+The first section of this file is the provider declaration file.
+```
+terraform {
+    requried_providers {
+        vmc = {
+          source = "vmware/vmc"
+          version = "1.13.0"
+        }
+    }
+}
+```
+After declaring the required provider section you will define 2 different resource types, **Data** and **Resource**.
+
+**Data** = gets information from the resource.  
+**Resource** = creates/updates the resource.
+
+![resource types](Images/resource%20types.png)
